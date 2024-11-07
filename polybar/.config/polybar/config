@@ -1,0 +1,360 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+;;palete
+color1 = #e0af68
+color2 = #d9d4cd
+color3 = #73daca
+color4 = #2ac3de
+color5 = #bb9af7 
+color6 = #c0caf5
+
+color12 = #32344a
+color13 = #f7768e
+color14 = #9ece6a
+color15 = #e0af68
+color16 = #7aa2f7
+color17 = #ad8ee6
+color18 = #449dab
+color19 = #787c99
+
+#shade1 = #e8eefc 
+shade1 = #8cabf2 
+shade2 = #baccf7 
+
+;; main colors
+background = #1F1F1F
+foreground = #FFFFFF
+foreground-arrow = #000000 
+
+arrow-background1 = ${self.shade1} 
+arrow-background2 = ${self.shade2}
+
+i3-selected-background = ${self.shade1} 
+i3-selected-foreground = #000000
+i3-separator = #FFFFFF
+i3-current-display-underline = #FFFFFF
+i3-other-display-underline = #FFFFFF 
+i3-other-display-selected-background = ${self.shade2}
+i3-other-display-selected-foreground = #000000 
+
+primary = ${colors.shade6}
+secondary = #8ABEB7
+alert = #A54242
+disabled = #707880
+
+
+[bar/base]
+bottom = true
+width = 100%
+height = 18pt
+radius = 0
+
+; dpi = 96
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0pt
+
+padding-left = 0
+padding-right = 1
+
+module-margin = 0
+
+separator-foreground = ${colors.disabled}
+
+
+font-0 = PowerlineSymbols:style=Medium;size=15;4
+font-1 = Open Sans Semibold:style=Semibold;size=10;3
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+enable-ipc = true
+
+
+; wm-restack = generic
+; wm-restack = bspwm
+wm-restack = i3
+override-redirect = false
+
+[bar/single]
+monitor = eDP-1
+inherit = bar/base
+modules-left = i3
+modules-right = arrowstart filesystem arrow2 pulseaudio arrow1 xkeyboard arrow2 memory arrow1 cpu arrow2 wlan arrow1 date arrowend volume
+
+[bar/left]
+monitor = eDP-1
+inherit = bar/base
+modules-left = i3
+
+[bar/right1]
+monitor = HDMI-1
+inherit = bar/base
+tray-position = right
+tray-background = ${colors.background}
+modules-left = i3 xwindow
+modules-right = arrowstart filesystem arrow2 pulseaudio arrow1 xkeyboard arrow2 memory arrow1 cpu arrow2 wlan arrow1 date arrowend volume
+
+[bar/right2]
+monitor = DP-1-1
+inherit = bar/base
+tray-position = right
+tray-background = ${colors.background}
+modules-left = i3 xwindow
+modules-right = arrowstart filesystem arrow2 pulseaudio arrow1 xkeyboard arrow2 memory arrow1 cpu arrow2 wlan arrow1 date arrowend volume
+
+[bar/right3]
+monitor = DP-2-1
+inherit = bar/base
+tray-position = right
+tray-background = ${colors.background}
+modules-left = i3 xwindow
+modules-right = arrowstart filesystem arrow2 pulseaudio arrow1 xkeyboard arrow2 memory arrow1 cpu arrow2 wlan arrow1 date arrowend volume
+
+[module/arrow1]
+type               = custom/text
+content-background = ${colors.arrow-background2}
+content-foreground = ${colors.arrow-background1}
+content = 
+
+[module/base1]
+format-mounted-background = ${colors.arrow-background1}
+format-mounted-padding = 4
+format-unmounted-background = ${colors.arrow-background1}
+format-unmounted-padding = 4
+format-background = ${colors.arrow-background1}
+format-padding = 4
+
+[module/arrow2]
+type               = custom/text
+content-background = ${colors.arrow-background1}
+content-foreground = ${colors.arrow-background2}
+content = 
+
+[module/base2]
+format-volume-background = ${colors.arrow-background2}
+format-volume-padding = 4
+format-muted-background = ${colors.arrow-background2}
+format-muted-padding = 4
+format-background = ${colors.arrow-background2}
+format-padding = 4
+
+[module/arrowstart]
+type               = custom/text
+content-background = ${colors.background}
+content-foreground = ${colors.arrow-background1}
+content = 
+
+[module/arrowend]
+type               = custom/text
+content-background = ${colors.arrow-background1}
+content-foreground = ${colors.background}
+content = 
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:60:...%
+label-padding = 4
+
+[module/filesystem]
+type = internal/fs
+inherit = module/base1
+interval = 25
+mount-0 = /
+
+label-mounted = %mountpoint% %percentage_used%
+label-mounted-foreground = ${colors.foreground-arrow} 
+
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.disabled}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+inherit = module/base2
+
+format-volume-prefix = "VOL "
+format-volume-prefix-foreground = ${colors.foreground-arrow}
+format-volume = <label-volume>
+
+label-volume = %percentage%%
+label-volume-foreground = ${colors.foreground-arrow}
+
+label-muted = muted
+label-muted-foreground = ${colors.foreground-arrow}
+
+[module/xkeyboard]
+type = internal/xkeyboard
+inherit = module/base1
+blacklist-0 = num lock
+
+label-layout = %layout%
+label-layout-foreground = ${colors.foreground-arrow}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-foreground = ${colors.background}
+label-indicator-background = ${colors.secondary}
+
+[module/memory]
+type = internal/memory
+inherit = module/base2
+interval = 2
+format-prefix = "RAM "
+format-prefix-foreground = ${colors.foreground-arrow}
+label = %percentage_used:2%%
+label-foreground = ${colors.foreground-arrow}
+
+[module/cpu]
+type = internal/cpu
+inherit = module/base1
+interval = 2
+format-prefix = "CPU "
+format-prefix-foreground = ${colors.foreground-arrow}
+label = %percentage:2%%
+label-foreground = ${colors.foreground-arrow}
+
+[network-base]
+type = internal/network
+interval = 5
+format-connected = <label-connected>
+format-connected-foreground = ${colors.foreground-arrow}
+format-disconnected = <label-disconnected>
+format-disconnected-foreground = ${colors.foreground-arrow}
+label-disconnected = %ifname%% disconnected
+
+format-connected-background = ${colors.arrow-background2}
+format-connected-padding = 4
+format-disconnected-background = ${colors.arrow-background2}
+format-disconnected-padding = 4
+
+
+[module/wlan]
+interface = wlp0s20f3
+inherit = network-base
+interface-type = wireless
+label-connected = %essid% %local_ip%
+
+#[module/eth]
+#inherit = network-base
+#interface-type = wired
+#label-connected = %{F#F0C674}%ifname%%{F-} %local_ip%
+
+[module/date]
+type = internal/date
+inherit = module/base1
+interval = 1
+
+date = %Y-%m-%d %H:%M:%S
+date-alt = %H:%M
+
+label = %date%
+label-foreground = ${colors.foreground-arrow}
+
+[settings]
+screenchange-reload = true
+pseudo-transparency = true
+
+; vim:ft=dosini
+
+[module/i3]
+type = internal/i3
+
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
+
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = true
+
+ws-icon-0 = 1;♚
+ws-icon-1 = 2;♛
+ws-icon-2 = 3;♜
+ws-icon-3 = 4;♝
+ws-icon-4 = 5;♞
+ws-icon-default = ♟
+
+label-dimmed-underline = ${root.background}
+
+; Available tags:
+;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
+;   <label-mode> (default)
+format = <label-state> <label-mode>
+
+; Available tokens:
+;   %mode%
+; Default: %mode%
+label-mode = %mode%
+label-mode-padding = 0
+label-mode-background = #e60053
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-focused =  %index%
+label-focused-foreground = ${colors.i3-selected-foreground}
+label-focused-background = ${colors.i3-selected-background}
+label-focused-underline = ${colors.i3-current-display-underline}
+label-focused-padding = 1
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-unfocused = %index%
+label-unfocused-padding = 1
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-visible = %index%
+label-visible-underline = ${colors.i3-other-display-underline}
+label-visible-background = ${colors.i3-other-display-selected-background}
+label-visible-foreground = ${colors.i3-other-display-selected-foreground}
+label-visible-padding = 1
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-urgent = %index%
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-padding = 1
+
+; Separator in between workspaces
+label-separator = |
+label-separator-padding = 0
+label-separator-foreground = ${colors.i3-separator} 
