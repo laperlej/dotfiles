@@ -1,0 +1,9 @@
+[user]
+	email = jonathan.laperle@usherbrooke.ca
+	name = Jonathan Laperle
+[core]
+	editor = nvim
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true

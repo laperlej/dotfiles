@@ -1,0 +1,8 @@
+#! /bin/bash
+set -e
+WORKDIR=$(ls -d ~/Projects/* | fzf)
+cd $WORKDIR
+BASENAME=$(basename $WORKDIR)
+SAFEBASENAME=${BASENAME//\./_}
+tmux new-session -d -s ${SAFEBASENAME}
+tmux switch-client -t ${SAFEBASENAME}

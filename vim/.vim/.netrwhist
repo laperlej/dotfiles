@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/laperlej/Projects/sis-infra/ansible'
+let g:netrw_dirhist_1='/home/laperlej/Projects/scratchpad/rust/http/src'
+let g:netrw_dirhist_0='/home/laperlej/Projects/scratchpad/rust/http'
+let g:netrw_dirhist_9='/home/laperlej/Projects/scratchpad/rust/http/target'
+let g:netrw_dirhist_8='/home/laperlej/Projects/scratchpad/rust/http'
+let g:netrw_dirhist_7='/etc/wpa_supplicant'
+let g:netrw_dirhist_6='/home/laperlej/Projects/workstation/tasks'
+let g:netrw_dirhist_5='/home/laperlej/Projects/workstation'
+let g:netrw_dirhist_4='/home/laperlej/Projects/workstation/tasks'
+let g:netrw_dirhist_3='/home/laperlej/Projects/workstation'
