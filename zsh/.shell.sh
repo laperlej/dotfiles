@@ -2,19 +2,14 @@
 # Sources
 ###############################################################################
 
-[ -f "~/.secret-store/.env"] && source "~/.secret-store/.env"
+#[ -f "~/.secret-store/.env"] && source "~/.secret-store/.env"
 
 ###############################################################################
 # Exports
 ###############################################################################
 
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
-
 export PATH=~/.local/bin:$PATH
+export PATH=/opt/homebrew/bin:$PATH
 
 ###############################################################################
 # Aliases
