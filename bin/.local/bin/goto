@@ -1,6 +1,6 @@
 #! /bin/bash
 set -e
-WORKDIR=$(ls -d ~/Projects/* | fzf)
+WORKDIR=$(ls -d ~/Projects/* ~/workplace/* | fzf)
 cd $WORKDIR
 BASENAME=$(basename $WORKDIR)
 SAFEBASENAME=${BASENAME//\./_}

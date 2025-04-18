@@ -164,6 +164,21 @@ local plugins = {
 
 	-- terminal
 	"akinsho/toggleterm.nvim",
+
+    -- ai
+    {
+        name = 'amazonq',
+        url = 'ssh://git.amazon.com/pkg/AmazonQNVim',
+        opts = {
+          ssoStartUrl = 'https://amzn.awsapps.com/start',
+          -- Note: It's normally not necessary to change default `lsp_server_cmd`.
+          -- lsp_server_cmd = {
+          --   'node',
+          --   vim.fn.stdpath('data') .. '/lazy/AmazonQNVim/language-server/build/aws-lsp-codewhisperer-token-binary.js',
+          --   '--stdio',
+          -- },
+        },
+    },
 }
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

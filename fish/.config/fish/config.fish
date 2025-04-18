@@ -7,5 +7,9 @@ fish_vi_key_bindings
 
 bass source $HOME/.shell.sh
 
+function build-rec
+    brazil-recursive-cmd --allPackages brazil-build
+end
+
 starship init fish | source
 
