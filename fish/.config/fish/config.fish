@@ -7,14 +7,8 @@ fish_vi_key_bindings
 
 bass source $HOME/.shell.sh
 
-function tmo
-    tmux new-session -A -s main
-end
-
-function build-rec
-    brazil-recursive-cmd --allPackages brazil-build
-end
-
+alias build-rec='brazil-recursive-cmd --allPackages brazil-build'
+alias tmo='tmux new-session -A -s main'
 alias bb=brazil-build
 alias bba='brazil-build apollo-pkg'
 alias bre='brazil-runtime-exec'
