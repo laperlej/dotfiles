@@ -11,6 +11,8 @@ plugins=(
     zsh-syntax-highlighting
 )
 
+
+alias tmo='tmux new-session -A -s main'
 ZSH_THEME="robbyrussell"
 
 
