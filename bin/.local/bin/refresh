@@ -1,0 +1,9 @@
+#! /bin/bash
+
+refresh_credentials() {
+  #ps -ef | grep "ada credentials update" | grep -v grep | awk '{print $2}' | xargs kill
+  (ada credentials update --provider=isengard --account=${PLATFORM_ACCOUNT} --role=Admin --profile=${PLATFORM_PROFILE} > /dev/null 2>&1 &)
+  (ada credentials update --provider=isengard --account=${RABBIT_ACCOUNT} --role=Admin --profile=${RABBIT_PROFILE} > /dev/null 2>&1 &)
+}
+refresh_credentials
+
