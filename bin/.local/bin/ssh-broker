@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+case $1 in
+  oauth)
+    BROKER_ID=b-4720ea02-8f47-4996-b01a-03f9fbca6203
+    ;;
+  ldap)
+    BROKER_ID=b-55db3935-1850-4e80-b4af-09ea164b08be
+    ;;
+  *)
+    echo -n "unknown broker"
+    exit 1                                                                                                                                                                                                                                                                                                                  │    ;;
+esac
+
+eval `ssh-agent`
+ssh-add
+ssh-into-broker -d dev-${USER} -r pdx -c cell1_rabbitmq -b ${BROKER_ID}
