@@ -1,0 +1,3 @@
+#! /usr/bin/bash
+
+tmux new-session -A -s main

@@ -1,0 +1,3 @@
+#! /usr/bin/bash
+
+java -jar ~/Project/perf-test/perf-test.jar $@
