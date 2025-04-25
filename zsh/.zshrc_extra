@@ -10,6 +10,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
+export PATH=$PATH:/opt/homebrew/bin
 
 
 alias tmo='tmux new-session -A -s main'
