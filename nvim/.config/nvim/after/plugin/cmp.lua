@@ -10,18 +10,12 @@ cmp.setup({
 	mapping = {
 		["<C-p>"] = cmp.mapping.select_prev_item(),
 		["<C-n>"] = cmp.mapping.select_next_item(),
-		-- ["<C-j>"] = cmp.mapping(function(fallback)
-		-- 	cmp.mapping.abort()
-		-- 	local copilot_keys = vim.fn["copilot#Accept"]()
-		-- 	if copilot_keys ~= "" then
-		-- 		vim.api.nvim_feedkeys(copilot_keys, "i", true)
-		-- 	else
-		-- 		fallback()
-		-- 	end
-		-- end),
-		-- Add tab support
-		--["<S-Tab>"] = cmp.mapping.select_prev_item(),
-		--["<Tab>"] = cmp.mapping.select_next_item(),
+		["<C-j>"] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Insert,
+			select = true,
+        }),
+		["<S-Tab>"] = cmp.mapping.select_prev_item(),
+		["<Tab>"] = cmp.mapping.select_next_item(),
 		["<C-S-f>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),

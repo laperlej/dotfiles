@@ -13,6 +13,14 @@ require("telescope").setup({
 				["<c-q>"] = actions.send_to_qflist + actions.open_qflist,
 			},
 		},
+		file_ignore_patterns = {
+			"node%_modules/.*",
+			".git/.*",
+			"release%-info/.*",
+			"build/.*",
+			".bemol/.*",
+			".brazil/.*",
+		},
 	},
 	pickers = {
 		find_files = {

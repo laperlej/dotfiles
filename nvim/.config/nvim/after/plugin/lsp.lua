@@ -34,6 +34,7 @@ require("lspconfig").hls.setup({
 	cmd = { "haskell-language-server-wrapper", "--lsp" },
 })
 require("lspconfig").jsonls.setup({})
+require("lspconfig").jinja_lsp.setup({})
 
 local function bemol()
 	local bemol_dir = vim.fs.find({ ".bemol" }, { upward = true, type = "directory" })[1]

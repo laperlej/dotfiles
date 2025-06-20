@@ -1,6 +1,9 @@
 local null_ls = require("null-ls")
 
 local sources = {
+	-- null_ls.builtins.diagnostics.mypy.with({
+	-- 	method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+	-- }),
 	null_ls.builtins.formatting.stylua,
 	--null_ls.builtins.formatting.eslint_d,
 	-- null_ls.builtins.diagnostics.eslint.with({
@@ -17,6 +20,7 @@ local sources = {
 	null_ls.builtins.formatting.sqlfluff.with({
 		extra_args = { "--dialect", "postgres" }, -- change to your dialect
 	}),
+    null_ls.builtins.formatting.isort,
 	-- null_ls.builtins.diagnostics.checkstyle.with({
 	-- 	extra_args = { "-c", "/google_checks.xml" }, -- or "/sun_checks.xml" or path to self written rules
 	-- }),
@@ -32,17 +36,17 @@ local sources = {
 }
 
 require("null-ls").setup({
-	sources = sources,
 	debug = true,
-	-- you can reuse a shared lspconfig on_attach callback here
-	on_attach = function(client, bufnr)
-		if client.server_capabilities.documentFormattingProvider then
-			vim.cmd([[
-                augroup LspFormatting
-                autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
-                augroup END
-                ]])
-		end
-	end,
+	sources = sources,
+	-- 	-- you can reuse a shared lspconfig on_attach callback here
+	-- 	on_attach = function(client, bufnr)
+	-- 		if client.server_capabilities.documentFormattingProvider then
+	-- 			vim.cmd([[
+	--                 augroup LspFormatting
+	--                 autocmd! * <buffer>
+	--                 autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
+	--                 augroup END
+	--                 ]])
+	-- 		end
+	-- 	end,
 })

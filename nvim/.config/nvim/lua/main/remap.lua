@@ -65,7 +65,7 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 local bufopts = { noremap = true, silent = true, buffer = bufnr }
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-vim.keymap.set("n", "gf", vim.lsp.buf.code_action, bufopts)
+vim.keymap.set("n", "ga", vim.lsp.buf.code_action, bufopts)
 vim.keymap.set("n", "gr", vim.lsp.buf.rename, bufopts)
 vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
@@ -128,3 +128,6 @@ vim.keymap.set("n", "<leader>an", ":PrtChatNew<CR>")
 vim.keymap.set("n", "<leader>ap", ":PrtProvider<CR>")
 vim.keymap.set("n", "<leader>ag", ":PrtChatRespond<CR>")
 vim.keymap.set("n", "<leader>ad", ":PrtChatDelete<CR>")
+
+--format
+vim.keymap.set("n", "<leader>fo", vim.lsp.buf.format)
