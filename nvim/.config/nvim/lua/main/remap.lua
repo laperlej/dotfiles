@@ -2,6 +2,7 @@ local zenmode = require("zen-mode").toggle
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 local neogit = require("neogit")
+local fzf = require("fzf-lua")
 
 vim.g.mapleader = " "
 
@@ -23,11 +24,18 @@ vim.keymap.set("n", "<leader>hh", "<esc>:HardTimeToggle<cr>")
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 --telescope
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
-vim.keymap.set("n", "<leader>fi", "<cmd>Telescope git_files<cr>")
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
-vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
-vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
+-- vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+-- vim.keymap.set("n", "<leader>fi", "<cmd>Telescope git_files<cr>")
+-- vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
+-- vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+-- vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
+
+--fzf-lua
+vim.keymap.set("n", "<leader>ff", fzf.files)
+vim.keymap.set("n", "<leader>fi", fzf.git_files)
+vim.keymap.set("n", "<leader>fg", fzf.live_grep)
+vim.keymap.set("n", "<leader>fb", fzf.buffers)
+vim.keymap.set("n", "<leader>fh", fzf.tags)
 
 --harpoon
 vim.keymap.set("n", "<leader>ha", mark.add_file)

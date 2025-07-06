@@ -62,6 +62,6 @@ require("lspconfig").jdtls.setup({
 	on_attach = jdtls_attach,
 	cmd = {
 		"jdtls",
-		"--jvm-arg=-javaagent:" .. require("mason-registry").get_package("jdtls"):get_install_path() .. "/lombok.jar",
+		"--jvm-arg=-javaagent:" .. vim.fn.expand("$MASON/share/jdtls/lombok.jar"),
 	},
 })

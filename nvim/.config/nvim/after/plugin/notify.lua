@@ -1,6 +1,6 @@
-vim.notify = require("notify")
-vim.notify.setup({
-	render = "minimal",
-    top_down = false,
-	background_colour = "#1a1b26",
-})
+-- vim.notify = require("notify")
+-- vim.notify.setup({
+-- 	render = "minimal",
+--     top_down = false,
+-- 	background_colour = "#1a1b26",
+-- })
