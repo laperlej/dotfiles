@@ -1,0 +1,10 @@
+background-opacity = .80
+background = 000000
+shell-integration = fish
+
+macos-titlebar-style = hidden
+font-thicken = true
+
+window-colorspace = display-p3
+
+custom-shader = ~/.config/ghostty/shaders/cursor_smear_fade.glsl

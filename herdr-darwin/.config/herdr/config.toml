@@ -1,0 +1,76 @@
+onboarding = false
+
+[update]
+channel = "stable"
+version_check = true
+
+[terminal]
+default_shell = "/opt/homebrew/bin/fish"
+shell_mode = "auto"
+new_cwd = "follow"
+
+[keys]
+prefix = "ctrl+a"
+
+# Tab management (= tmux windows)
+new_tab = "prefix+c"
+next_tab = "prefix+n"
+previous_tab = "prefix+p"
+switch_tab = "prefix+1..9"
+rename_tab = "prefix+shift+t"
+close_tab = "prefix+shift+x"
+
+# Workspace navigation (= tmux session switching)
+# prefix+g = goto picker (like tmux prefix+s)
+goto = "prefix+g"
+workspace_picker = "prefix+s"
+new_workspace = "prefix+shift+n"
+rename_workspace = "prefix+shift+w"
+close_workspace = "prefix+shift+d"
+
+# Pane navigation (vim keys, same as tmux config)
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# Splits
+split_vertical = "prefix+v"
+split_horizontal = "prefix+minus"
+close_pane = "prefix+x"
+zoom = "prefix+z"
+
+# Copy mode
+copy_mode = "prefix+["
+
+# Detach
+detach = "prefix+q"
+
+# Sidebar toggle
+toggle_sidebar = "prefix+b"
+
+[theme]
+name = "tokyo-night"
+auto_switch = false
+
+[ui]
+sidebar_collapsed_mode = "compact"
+mouse_capture = true
+confirm_close = false
+prompt_new_tab_name = false
+pane_borders = true
+pane_gaps = false
+hide_tab_bar_when_single_tab = true
+agent_panel_sort = "spaces"
+
+[ui.toast]
+delivery = "off"
+
+[ui.sound]
+enabled = false
+
+[session]
+resume_agents_on_restore = true
+
+[advanced]
+scrollback_limit_bytes = 10485760

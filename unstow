@@ -1,11 +1,21 @@
 #!/usr/bin/env bash
-if [[ -z $STOW_FOLDERS ]]; then
-    STOW_FOLDERS="bin,git,nvim,zsh,tmux,vim,starship,fish,ghostty,aerospace"
-fi
+# Stow the dotfiles into ~. Each name in STOW_FOLDERS stows the shared package <name>/ if it exists and the
+# package for this OS, <name>-darwin/ or <name>-linux/, if that exists, so one list works on every machine.
+# --no-folding links files, never whole directories: whatever a program writes next to its config
+# (fish_variables, herdr's sockets, vim's .netrwhist) lands in ~, not in this repo.
+set -o errexit
+set -o nounset
+set -o pipefail
 
-for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
-do
-    echo "stow $folder"
-    stow -D $folder -t ~
-    stow $folder -t ~
+cd "$(dirname "${BASH_SOURCE[0]}")"
+
+os="$(uname -s | tr '[:upper:]' '[:lower:]')"
+STOW_FOLDERS="${STOW_FOLDERS:-bin,git,nvim,zsh,tmux,vim,starship,fish,ghostty,aerospace,herdr}"
+
+for folder in ${STOW_FOLDERS//,/ }; do
+    for package in "${folder}" "${folder}-${os}"; do
+        [[ -d "${package}" ]] || continue
+        echo "stow ${package}"
+        stow --restow --no-folding --target "${HOME}" "${package}"
+    done
 done
