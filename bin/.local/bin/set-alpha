@@ -1,0 +1,14 @@
+#!/bin/bash
+
+percent=$1
+config_file="$HOME/.config/ghostty/config"
+
+if [ "$percent" = "default" ] || [ "$percent" = "reset" ] || [ -z "$percent" ]; then
+    percent=80
+fi
+
+opacity=$(echo "scale=2; $percent / 100" | bc)
+sed -i '' "s/background-opacity = .*/background-opacity = $opacity/" "$config_file"
+
+# Hot reload Ghostty config
+pkill -SIGUSR2 ghostty

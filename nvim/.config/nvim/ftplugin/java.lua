@@ -2,9 +2,29 @@ vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 
--- local config = {
--- 	cmd = { "/home/laperlej/.local/share/jdtls/bin/jdtls" },
--- 	root_dir = vim.fs.dirname(vim.fs.find({ ".gradlew", ".git", "mvnw", "pom.xml" }, { upward = true })[1]),
--- }
---
--- require("jdtls").start_or_attach(config)
+-- Trust gradle wrappers in our Brazil workspaces
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client and client.name == "jdtls" then
+			client:notify("workspace/didChangeConfiguration", {
+				settings = {
+					java = {
+						imports = {
+							gradle = {
+								wrapper = {
+									checksums = {
+										{
+											sha256 = "7d3a4ac4de1c32b59bc6a4eb8ecb8e612ccd0cf1ae1e99f66902da64df296172",
+											allowed = true,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			})
+		end
+	end,
+})

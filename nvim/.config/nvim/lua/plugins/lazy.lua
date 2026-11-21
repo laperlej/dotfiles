@@ -15,6 +15,13 @@ local plugins = {
 		},
 		config = true,
 	},
+    --neoorg
+    {
+    "nvim-neorg/neorg",
+    lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+    version = "*", -- Pin Neorg to the latest stable release
+    config = true,
+    },
 
 	--file navigation
 	{ "stevearc/oil.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
@@ -63,7 +70,6 @@ local plugins = {
 	-- treesitter
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 	"nvim-treesitter/nvim-treesitter-context",
-	"nvim-treesitter/playground",
 
 	--null-ls
 	--"jose-elias-alvarez/null-ls.nvim",
@@ -168,19 +174,6 @@ local plugins = {
 	"akinsho/toggleterm.nvim",
 
     -- ai
-    {
-        name = 'amazonq',
-        url = 'ssh://git.amazon.com/pkg/AmazonQNVim',
-        opts = {
-          ssoStartUrl = 'https://amzn.awsapps.com/start',
-          -- Note: It's normally not necessary to change default `lsp_server_cmd`.
-          -- lsp_server_cmd = {
-          --   'node',
-          --   vim.fn.stdpath('data') .. '/lazy/AmazonQNVim/language-server/build/aws-lsp-codewhisperer-token-binary.js',
-          --   '--stdio',
-          -- },
-        },
-    },
     {
       "yetone/avante.nvim",
       -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

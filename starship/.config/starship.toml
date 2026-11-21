@@ -6,8 +6,6 @@ palette = "catppuccin_macchiato"
 add_newline = false
 
 format = """
-$username\
-$hostname\
 $directory\
 $git_branch\
 $character\
@@ -15,6 +13,7 @@ $character\
 
 right_format = """
 $python\
+$aws\
 $time\
 """
 
@@ -27,6 +26,11 @@ vimcmd_visual_symbol = '[V](bold yellow)'
 
 [git_branch]
 style = "bold peach"
+
+[aws]
+format = '[$symbol$region]($style) '
+style = 'bold yellow'
+symbol = '☁️ '
 
 [time]
 disabled = false
