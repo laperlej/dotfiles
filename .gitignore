@@ -1,5 +1,3 @@
 # Written by the programs themselves at runtime; the shared settings live in the files next to them.
 fish/.config/fish/fish_variables
-# The pre-split herdr package; the Mac's live herdr state stays in it until herdr restarts.
-/herdr/
 vim/.vim/.netrwhist
