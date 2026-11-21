@@ -2,54 +2,45 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+# -g keeps PATH a session setting; without it fish_add_path saves absolute paths into fish_variables.
+fish_add_path -g ~/.local/bin ~/.toolbox/bin
+if test (uname) = Darwin
+    fish_add_path -g /opt/homebrew/bin /opt/homebrew/opt/curl/bin
+end
+
+# ASDF configuration code
+if test -z $ASDF_DATA_DIR
+    set _asdf_shims "$HOME/.asdf/shims"
+else
+    set _asdf_shims "$ASDF_DATA_DIR/shims"
+end
+
+# Do not use fish_add_path (added in Fish 3.2) because it
+# potentially changes the order of items in PATH
+if not contains $_asdf_shims $PATH
+    set -gx --prepend PATH $_asdf_shims
+end
+set --erase _asdf_shims
+
 set fish_greeting ""
 fish_vi_key_bindings
 
-bass source $HOME/.shell.sh
+set -gx EDITOR nvim
 
-set -gx SAM_ASSUME_ACCOUNT_ID 929962505089
-set -gx SAM_ISENGARD_ROLE_NAME Admin
-set -gx SAM_ASSUME_ACCOUNT_ID_RABBITMQ 678817682165
-set -gx SAM_ISENGARD_ROLE_NAME_RABBITMQ Admin
-
-set -gx PLATFORM_ACCOUNT 929962505089
-set -gx PLATFORM_PROFILE rabbit-dev
-set -gx RABBIT_ACCOUNT 678817682165
-set -gx RABBIT_PROFILE active-dev
-
-function refresh_bedrock
-    set -gx AWS_PROFILE rabbit-dev
-    set -gx AWS_REGION us-west-2
-    set -gx AWS_ACCESS_KEY_ID $(ada cred print --profile=$AWS_PROFILE | jq -r ".AccessKeyId")
-    set -gx AWS_SECRET_ACCESS_KEY $(ada cred print --profile=$AWS_PROFILE | jq -r ".SecretAccessKey")
-    set -gx AWS_SESSION_TOKEN $(ada cred print --profile=$AWS_PROFILE | jq -r ".SessionToken")
-    set -gx BEDROCK_KEYS "$AWS_ACCESS_KEY_ID,$AWS_SECRET_ACCESS_KEY,$AWS_REGION,$AWS_SESSION_TOKEN"
-end
-refresh_bedrock
-
-fish_add_path /opt/homebrew/bin
-fish_add_path /opt/homebrew/opt/curl/bin
-
-alias build-rec='brazil-recursive-cmd --allPackages brazil-build'
+alias v='nvim'
 alias tmo='tmux new-session -A -s main'
-alias bb=brazil-build
-alias bba='brazil-build apollo-pkg'
-alias bre='brazil-runtime-exec'
-alias brc='brazil-recursive-cmd'
-alias bws='brazil ws'
-alias bwsuse='bws use -p'
-alias bwscreate='bws create -n'
-alias brc=brazil-recursive-cmd
-alias bbr='brc brazil-build'
-alias bball='brc --allPackages'
-alias bbb='brc --allPackages brazil-build'
-alias bbra='bbr apollo-pkg'
-
 starship init fish | source
 
 
-. (brew --prefix asdf)/libexec/asdf.fish
+if command -q brew; and test -d (brew --prefix asdf)
+    . (brew --prefix asdf)/libexec/asdf.fish
+    # -u writes ~/.tool-versions; a bare `asdf set` writes .tool-versions into the current directory.
+    asdf set -u erlang 27.3.3
+    asdf set -u elixir 1.18.3
+    set ERLANG_HOME $(asdf where erlang)
+end
 
-asdf set erlang 27.3.3
-asdf set elixir 1.18.3
-set ERLANG_HOME $(asdf where erlang)
+# Settings that stay out of this public repo (work accounts, internal tools) live in ~/.config/fish-private/.
+for f in ~/.config/fish-private/*.fish
+    source $f
+end
