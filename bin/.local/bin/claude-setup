@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# claude-setup: give a personal machine's Claude Code the mods and the Playwright MCP server.
+# Merges ~/workplace/dotfiles/main/claude/settings.personal.json into ~/.claude/settings.json (keys already there
+# win, plugin and marketplace lists are combined), then adds Playwright as a user-scope MCP server if it's missing.
+# Claude Code installs the listed plugins from their marketplaces at its next start. Safe to rerun.
+set -o errexit
+set -o nounset
+set -o pipefail
+
+declare -r TEMPLATE="${DOTFILES:-${HOME}/workplace/dotfiles/main}/claude/settings.personal.json"
+declare -r SETTINGS="${HOME}/.claude/settings.json"
+
+command -v claude >/dev/null || { echo "claude-setup: install Claude Code first" >&2; exit 1; }
+command -v npx >/dev/null || { echo "claude-setup: Playwright's MCP server needs Node.js (npx)" >&2; exit 1; }
+
+mkdir -p "$(dirname "${SETTINGS}")"
+python3 - "${TEMPLATE}" "${SETTINGS}" <<'PY'
+import json, os, sys
+template_path, settings_path = sys.argv[1], sys.argv[2]
+template = json.load(open(template_path))
+settings = json.load(open(settings_path)) if os.path.exists(settings_path) else {}
+for key, value in template.items():
+    if isinstance(value, dict) and isinstance(settings.get(key), dict):
+        settings[key] = {**value, **settings[key]}
+    else:
+        settings.setdefault(key, value)
+with open(settings_path, "w") as f:
+    json.dump(settings, f, indent=2)
+    f.write("\n")
+print(f"claude-setup: merged {template_path} into {settings_path}")
+PY
+
+if claude mcp get playwright >/dev/null 2>&1; then
+    echo "claude-setup: Playwright MCP server already set up"
+else
+    claude mcp add --scope user playwright -- npx -y @playwright/mcp@latest
+fi
+echo "claude-setup: start Claude Code; it installs corral and prismantis from their marketplaces"

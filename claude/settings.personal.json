@@ -1,0 +1,12 @@
+{
+  "editorMode": "vim",
+  "extraKnownMarketplaces": {
+    "corral": { "source": { "source": "github", "repo": "laperlej/corral" } },
+    "prismantis": { "source": { "source": "github", "repo": "NahumLitvin/prismantis" } }
+  },
+  "enabledPlugins": {
+    "corral-progress@corral": true,
+    "corral-fleet@corral": true,
+    "prismantis@prismantis": true
+  }
+}
